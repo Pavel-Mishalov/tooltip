@@ -16,18 +16,30 @@
 		const element = el
 		const text = el.getAttribute('data-tooltip')
 
-		return new Tooltip(element, text)
+		return new Tooltip(element, text) //тут мы короче для каждой штуки присваиваем экземпляр класса
 	})
 
 	// Инициализируем список Tooltip
-	tooltipList.forEach((tooltipObj) => {
-		console.log(tooltipObj, 'object is initialize')
-		tooltipObj.init()
 
-		// Эмулируем остановку работы Tooltip
-		setTimeout(() => {
-			console.log(tooltipObj, 'object is destroyed')
-			tooltipObj.destroy()
-		}, 20000)
+	tooltipList.forEach((tooltipObj) => {
+		let timer
+		console.log(tooltipObj, 'object is initialize')
+
+		tooltipObj.element.onmouseover = function() {
+			tooltipObj.init()
+			clearTimeout(timer)
+		}
+
+		//удаление
+
+		tooltipObj.element.onmouseout = function(){
+			timer = setTimeout(() => {
+				console.log(tooltipObj, 'object is destroyed')
+				tooltipObj.destroy()
+			}, 2000)
+		}
+		
 	})
+
+
 </script>
