@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="./app.css">
+<script src="./app.js"></script>
+
+<div class="container">
+	<button class="btn" data-tooltip="This is tooltip message">
+		Btn with tooltip
+	</button>
+</div>
+
+<script>
+	// Находим все элементы которые необходимо проинициализировать
+	const elements = document.querySelectorAll('[data-tooltip]')
+	
+	// Создаем массив классов Tooltip
+	const tooltipList = Array.from(elements).map((el) => {
+		const element = el
+		const text = el.getAttribute('data-tooltip')
+
+		return new Tooltip(element, text)
+	})
+
+	// Инициализируем список Tooltip
+	tooltipList.forEach((tooltipObj) => {
+		console.log(tooltipObj, 'object is initialize')
+		tooltipObj.init()
+
+		// Эмулируем остановку работы Tooltip
+		setTimeout(() => {
+			console.log(tooltipObj, 'object is destroyed')
+			tooltipObj.destroy()
+		}, 20000)
+	})
+</script>
