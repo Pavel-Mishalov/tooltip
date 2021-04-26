@@ -15,9 +15,7 @@ class Tooltip {
 	// Инициализация работы данного tooltip
 	// при наведении на элемент он должен появляться
 	init() {
-		if(this.tooltipElem){
-
-		}else{
+		if(!this.tooltipElem){
 			this.tooltipElem = document.createElement('div');
 			this.tooltipElem.className = 'tooltip';
 			this.tooltipElem.innerHTML = this.text;
